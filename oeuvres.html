@@ -203,7 +203,10 @@ function initCarousel(slidesId, dotsId) {
 
   const total = slides.children.length;
   let current = 0;
+
   let startX = 0;
+  let currentX = 0;
+  let isDragging = false;
 
   // DOTS
   for (let i = 0; i < total; i++) {
@@ -227,40 +230,33 @@ function initCarousel(slidesId, dotsId) {
     });
   }
 
-  // SWIPE MOBILE
-  slides.addEventListener("touchstart", e => {
-    startX = e.touches[0].clientX;
-  });
-
-  slides.addEventListener("touchend", e => {
-    const diff = startX - e.changedTouches[0].clientX;
-    const threshold = 40;
-
-    if (diff > threshold && current < total - 1) current++;
-    else if (diff < -threshold && current > 0) current--;
-
-    update();
-  });
-
-  // DRAG DESKTOP
-  let isDown = false;
-
-  slides.addEventListener("mousedown", e => {
-    isDown = true;
+  // 👉 SWIPE UNIFIÉ (TOUCH + MOUSE)
+  slides.addEventListener("pointerdown", (e) => {
     startX = e.clientX;
+    isDragging = true;
   });
 
-  slides.addEventListener("mouseup", e => {
-    if (!isDown) return;
-    isDown = false;
+  slides.addEventListener("pointerup", (e) => {
+    if (!isDragging) return;
+    isDragging = false;
 
-    const diff = startX - e.clientX;
-    const threshold = 40;
+    currentX = e.clientX;
+    const diff = startX - currentX;
 
-    if (diff > threshold && current < total - 1) current++;
-    else if (diff < -threshold && current > 0) current--;
+    const threshold = 50;
+
+    if (diff > threshold && current < total - 1) {
+      current++;
+    } 
+    else if (diff < -threshold && current > 0) {
+      current--;
+    }
 
     update();
+  });
+
+  slides.addEventListener("pointercancel", () => {
+    isDragging = false;
   });
 }
 
