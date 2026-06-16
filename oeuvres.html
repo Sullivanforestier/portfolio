@@ -2,23 +2,128 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
-<title>Œuvres</title>
+<title>Œuvres — Sullivan Forestier</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<style>
-body { font-family: Arial; margin:0; color:#111; }
-nav { padding:20px; text-align:center; }
-nav a { margin:0 10px; text-decoration:none; color:#111; opacity:0.7; }
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;700&display=swap" rel="stylesheet">
 
-.container {
-  max-width: 800px;
-  margin: auto;
-  padding: 20px;
+<style>
+body {
+  margin: 0;
+  font-family: "Manrope", Arial, sans-serif;
+  background: #f7f6f2;
+  color: #111;
 }
 
-.project { margin-bottom: 80px; }
+/* NAV */
+nav {
+  text-align: center;
+  padding: 20px 10px;
+}
 
-img { width:100%; margin-top:10px; }
+nav a {
+  margin: 0 10px;
+  text-decoration: none;
+  color: #111;
+  opacity: 0.7;
+  font-size: 14px;
+}
+
+nav a:hover {
+  opacity: 1;
+}
+
+/* PAGE */
+.container {
+  max-width: 1000px;
+  margin: auto;
+  padding: 20px 20px 80px;
+}
+
+/* TITRE */
+.work-title {
+  font-size: 26px;
+  margin-bottom: 14px;
+}
+
+.italic {
+  font-style: italic;
+}
+
+/* CARTEL */
+.work-meta {
+  font-size: 14px;
+  line-height: 1.7;
+  margin-bottom: 40px;
+}
+
+/* CAROUSEL */
+.carousel {
+  position: relative;
+}
+
+/* FENÊTRE FIXE */
+.frame {
+  width: 100%;
+  height: 75vh;
+  max-height: 800px;
+  min-height: 500px;
+  overflow: hidden;
+  position: relative;
+  border: 1px solid rgba(0,0,0,0.08);
+}
+
+.slides {
+  display: flex;
+  height: 100%;
+  transition: transform 0.35s ease;
+}
+
+.slide {
+  min-width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.slide img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+
+/* DOTS */
+.dots {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 22px;
+}
+
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgba(0,0,0,0.2);
+  cursor: pointer;
+}
+
+.dot.active {
+  background: rgba(0,0,0,0.75);
+}
+
+/* MOBILE */
+@media (max-width: 768px) {
+  .frame {
+    height: 60vh;
+    min-height: 380px;
+  }
+
+  .work-title {
+    font-size: 22px;
+  }
+}
 </style>
 </head>
 
@@ -26,6 +131,7 @@ img { width:100%; margin-top:10px; }
 
 <nav>
   <a href="index.html">Home</a>
+  <a href="oeuvres.html">Œuvres</a>
   <a href="statement.html">Statement</a>
   <a href="cv.html">CV</a>
   <a href="contact.html">Contact</a>
@@ -33,20 +139,82 @@ img { width:100%; margin-top:10px; }
 
 <div class="container">
 
-<div class="project">
-<h2>Projet 01</h2>
-<p>Texte court...</p>
-<img src="img1.jpg">
-<img src="img2.jpg">
+  <div class="work-title">
+    <span class="italic">Les chambres</span> /
+    <span class="italic">Somewhere Over the Rainbow</span>
+  </div>
+
+  <div class="work-meta">
+    Juin 2026<br>
+    Installation, dimensions variables<br>
+    Matériaux mixtes
+  </div>
+
+  <div class="carousel">
+    <div class="frame">
+      <div class="slides" id="slides">
+
+        <div class="slide"><img src="vue-sol.jpg"></div>
+        <div class="slide"><img src="vue-haut.jpg"></div>
+        <div class="slide"><img src="vue-porte.jpg"></div>
+        <div class="slide"><img src="tombe.jpg"></div>
+        <div class="slide"><img src="sommier.jpg"></div>
+        <div class="slide"><img src="meuble-metal.jpg"></div>
+        <div class="slide"><img src="couteau.jpg"></div>
+        <div class="slide"><img src="photo.jpg"></div>
+        <div class="slide"><img src="texte.jpg"></div>
+
+      </div>
+    </div>
+  </div>
+
+  <div class="dots" id="dots"></div>
+
 </div>
 
-<div class="project">
-<h2>Projet 02</h2>
-<p>Texte court...</p>
-<img src="img3.jpg">
-</div>
+<script>
+const slides = document.getElementById("slides");
+const dotsContainer = document.getElementById("dots");
+const totalSlides = slides.children.length;
+let current = 0;
 
-</div>
+for (let i = 0; i < totalSlides; i++) {
+  const dot = document.createElement("div");
+  dot.classList.add("dot");
+  if (i === 0) dot.classList.add("active");
+
+  dot.addEventListener("click", () => {
+    current = i;
+    updateCarousel();
+  });
+
+  dotsContainer.appendChild(dot);
+}
+
+function updateCarousel() {
+  slides.style.transform = `translateX(-${current * 100}%)`;
+
+  document.querySelectorAll(".dot").forEach((dot, index) => {
+    dot.classList.toggle("active", index === current);
+  });
+}
+
+let startX = 0;
+
+slides.addEventListener("touchstart", e => {
+  startX = e.touches[0].clientX;
+});
+
+slides.addEventListener("touchend", e => {
+  let endX = e.changedTouches[0].clientX;
+  let diff = startX - endX;
+
+  if (diff > 50 && current < totalSlides - 1) current++;
+  if (diff < -50 && current > 0) current--;
+
+  updateCarousel();
+});
+</script>
 
 </body>
 </html>
