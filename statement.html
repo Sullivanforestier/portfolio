@@ -2,23 +2,81 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
-<title>Statement</title>
+<title>Statement — Sullivan Forestier</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<style>
-body { font-family: Arial; margin:0; }
-nav { padding:20px; text-align:center; }
-nav a { margin:0 10px; text-decoration:none; color:#111; opacity:0.7; }
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500&display=swap" rel="stylesheet">
 
-.content {
-  max-width: 650px;
-  margin: auto;
-  padding: 40px 20px;
+<style>
+body {
+  margin: 0;
+  font-family: "Manrope", Arial, sans-serif;
+  background: #f7f6f2;
+  color: #111;
 }
 
-h1 { font-weight:400; text-align:center; }
-p { line-height:1.6; font-size:14px; }
+/* NAV */
+nav {
+  text-align: center;
+  padding: 20px 10px;
+}
+
+nav a {
+  margin: 0 10px;
+  text-decoration: none;
+  color: #111;
+  opacity: 0.7;
+  font-size: 14px;
+}
+
+nav a:hover {
+  opacity: 1;
+}
+
+/* CONTAINER */
+.container {
+  max-width: 1100px;
+  margin: auto;
+  padding: 20px 20px 60px;
+}
+
+/* DEUX COLONNES */
+.columns {
+  display: flex;
+  gap: 60px;
+  align-items: flex-start;
+}
+
+/* COLONNE */
+.col {
+  flex: 1;
+}
+
+/* TITRE LANGUE */
+.lang {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  margin-bottom: 15px;
+}
+
+/* TEXTE */
+p {
+  text-align: justify;
+  font-size: 14px;
+  line-height: 1.6;
+  margin: 0 0 15px 0;
+}
+
+/* RESPONSIVE */
+@media (max-width: 900px) {
+  .columns {
+    flex-direction: column;
+    gap: 30px;
+  }
+}
 </style>
+
 </head>
 
 <body>
@@ -26,18 +84,46 @@ p { line-height:1.6; font-size:14px; }
 <nav>
   <a href="index.html">Home</a>
   <a href="oeuvres.html">Œuvres</a>
+  <a href="statement.html">Statement</a>
   <a href="cv.html">CV</a>
   <a href="contact.html">Contact</a>
 </nav>
 
-<div class="content">
+<div class="container">
 
-<h1>Statement</h1>
+<div class="columns">
 
-<p>Ma pratique artistique prend racine dans une réflexion autour de la mort, du deuil et de la reconstruction après l’effondrement de l’intime. À travers l’installation et la sculpture, j’explore la domesticité comme un espace ambivalent : lieu de refuge, mais aussi de violence, de mémoire et de survivance.
+  <!-- FR -->
+  <div class="col">
 
-Je m’intéresse à la manière dont le corps habite l’espace, et dont l’espace, en retour, marque les corps. Le verre, les fragments, le textile et les objets glanés deviennent les traces matérielles d’histoires de disparition, de protection ou de réparation. Mes installations construisent des espaces liminaux où coexistent vulnérabilité, absence et possibilité de transformation.
-</p>
+    <div class="lang"><strong>FR</strong></div>
+
+    <p>
+    Ma pratique artistique prend racine dans une réflexion autour de la mort, du deuil et des processus de reconstruction après l’effondrement de l’intime. À travers l’installation et la sculpture, j’explore la domesticité comme un espace ambivalent : à la fois lieu de refuge, de mémoire, mais aussi de violence et de survivance.
+    </p>
+
+    <p>
+    Je m’intéresse aux relations d’influence réciproque entre le corps et l’espace : la manière dont le corps habite les lieux, et dont les lieux, en retour, inscrivent leurs traces sur les corps. Le verre, les fragments, le textile et les objets glanés deviennent les supports d’histoires de disparition, de protection ou de réparation. Mes installations construisent des espaces liminaux où coexistent vulnérabilité, absence et transformation.
+    </p>
+
+  </div>
+
+  <!-- EN -->
+  <div class="col">
+
+    <div class="lang"><strong>EN</strong></div>
+
+    <p>
+    My artistic practice is rooted in a reflection on death, mourning, and processes of reconstruction following the collapse of intimacy. Through installation and sculpture, I explore domesticity as an ambivalent space: both a place of refuge and memory, but also of violence and survival.
+    </p>
+
+    <p>
+    I am interested in the reciprocal relationship between body and space: how the body inhabits places, and how places, in turn, inscribe their traces onto bodies. Glass, fragments, textiles, and found objects become carriers of narratives of disappearance, protection, and repair. My installations construct liminal spaces where vulnerability, absence, and transformation coexist.
+    </p>
+
+  </div>
+
+</div>
 
 </div>
 
