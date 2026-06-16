@@ -5,14 +5,13 @@
 <title>Portfolio</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<!-- TYPOGRAPHIE -->
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500&display=swap" rel="stylesheet">
 
 <style>
 body {
   margin: 0;
   font-family: "Manrope", Arial, sans-serif;
-  background: #f7f6f2; /* blanc nacré très léger */
+  background: #f7f6f2;
   color: #111;
 }
 
@@ -20,8 +19,6 @@ body {
 nav {
   text-align: center;
   padding: 20px;
-  position: relative;
-  z-index: 10;
 }
 
 nav a {
@@ -30,30 +27,23 @@ nav a {
   color: #111;
   opacity: 0.7;
   font-size: 14px;
-  letter-spacing: 0.5px;
 }
 
-nav a:hover {
-  opacity: 1;
-}
-
-/* BANDEAU IMAGE */
+/* HERO = BANDEAU PROPRE */
 .hero {
   width: 100%;
   height: 240px;
   background: url("IMG_2091.jpeg") center/cover no-repeat;
   filter: blur(1.5px);
-
 }
 
-/* TITRE */
-.overlay {
+/* TITRE PROPRE SOUS L’IMAGE */
+.title {
   text-align: center;
-  margin-top: -170px;
-  position: relative;
+  padding: 30px 20px;
 }
 
-h1 {
+.title h1 {
   font-weight: 400;
   letter-spacing: 2px;
   background: rgba(255,255,255,0.6);
@@ -76,7 +66,7 @@ h1 {
 
 <div class="hero"></div>
 
-<div class="overlay">
+<div class="title">
   <h1>Sullivan Forestier</h1>
 </div>
 
