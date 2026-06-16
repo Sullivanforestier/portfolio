@@ -15,7 +15,6 @@ body {
   color: #111;
 }
 
-/* NAV */
 nav {
   text-align: center;
   padding: 20px 10px;
@@ -33,7 +32,6 @@ nav a:hover {
   opacity: 1;
 }
 
-/* PAGE */
 .container {
   max-width: 1000px;
   margin: auto;
@@ -50,26 +48,26 @@ nav a:hover {
   font-style: italic;
 }
 
-/* CARTEL */
+/* META */
 .work-meta {
   font-size: 14px;
   line-height: 1.7;
   margin-bottom: 40px;
 }
 
-/* CAROUSEL */
-.carousel {
-  position: relative;
+/* SEPARATEUR */
+.sep {
+  margin: 70px 0;
+  border-bottom: 1px solid rgba(0,0,0,0.12);
 }
 
-/* FENÊTRE FIXE */
+/* CAROUSEL FRAME */
 .frame {
   width: 100%;
   height: 75vh;
   max-height: 800px;
   min-height: 500px;
   overflow: hidden;
-  position: relative;
   border: 1px solid rgba(0,0,0,0.08);
 }
 
@@ -98,7 +96,7 @@ nav a:hover {
   display: flex;
   justify-content: center;
   gap: 10px;
-  margin-top: 22px;
+  margin-top: 20px;
 }
 
 .dot {
@@ -111,18 +109,6 @@ nav a:hover {
 
 .dot.active {
   background: rgba(0,0,0,0.75);
-}
-
-/* MOBILE */
-@media (max-width: 768px) {
-  .frame {
-    height: 60vh;
-    min-height: 380px;
-  }
-
-  .work-title {
-    font-size: 22px;
-  }
 }
 </style>
 </head>
@@ -139,81 +125,111 @@ nav a:hover {
 
 <div class="container">
 
-  <div class="work-title">
-    <span class="italic">Les chambres</span> /
-    <span class="italic">Somewhere Over the Rainbow</span>
+<!-- PIECE 1 -->
+<div class="work-title">
+  <span class="italic">Les chambres</span> /
+  <span class="italic">Somewhere Over the Rainbow</span>
+</div>
+
+<div class="work-meta">
+Juin 2026<br>
+Installation, dimensions variables<br>
+Matériaux mixtes
+</div>
+
+<div class="frame">
+  <div class="slides" id="slides1">
+
+    <div class="slide"><img src="vue-sol.jpeg"></div>
+    <div class="slide"><img src="vue-haut.jpeg"></div>
+    <div class="slide"><img src="vue-porte.jpeg"></div>
+    <div class="slide"><img src="tombe.jpeg"></div>
+    <div class="slide"><img src="sommier.jpeg"></div>
+    <div class="slide"><img src="meuble-metal.jpeg"></div>
+    <div class="slide"><img src="couteau.jpeg"></div>
+    <div class="slide"><img src="photo.jpeg"></div>
+    <div class="slide"><img src="texte.jpeg"></div>
+
   </div>
+</div>
 
-  <div class="work-meta">
-    Juin 2026<br>
-    Installation, dimensions variables<br>
-    Matériaux mixtes
+<div class="dots" id="dots1"></div>
+
+<!-- SEPARATEUR -->
+<div class="sep"></div>
+
+<!-- PIECE 2 -->
+<div class="work-title">
+  <span class="italic">Le couloir</span> /
+  <span class="italic">The Kick Inside</span>
+</div>
+
+<div class="work-meta">
+Juin 2026<br>
+Installation, dimensions variables<br>
+Matériaux variés
+</div>
+
+<div class="frame">
+  <div class="slides" id="slides2">
+
+    <div class="slide"><img src="couloir.jpeg"></div>
+    <div class="slide"><img src="dehors.jpeg"></div>
+    <div class="slide"><img src="assiette.jpeg"></div>
+
   </div>
+</div>
 
-  <div class="carousel">
-    <div class="frame">
-      <div class="slides" id="slides">
-
-        <div class="slide"><img src="vue-sol.jpg"></div>
-        <div class="slide"><img src="vue-haut.jpg"></div>
-        <div class="slide"><img src="vue-porte.jpg"></div>
-        <div class="slide"><img src="tombe.jpg"></div>
-        <div class="slide"><img src="sommier.jpg"></div>
-        <div class="slide"><img src="meuble-metal.jpg"></div>
-        <div class="slide"><img src="couteau.jpg"></div>
-        <div class="slide"><img src="photo.jpg"></div>
-        <div class="slide"><img src="texte.jpg"></div>
-
-      </div>
-    </div>
-  </div>
-
-  <div class="dots" id="dots"></div>
+<div class="dots" id="dots2"></div>
 
 </div>
 
 <script>
-const slides = document.getElementById("slides");
-const dotsContainer = document.getElementById("dots");
-const totalSlides = slides.children.length;
-let current = 0;
+function initCarousel(slidesId, dotsId) {
+  const slides = document.getElementById(slidesId);
+  const dotsContainer = document.getElementById(dotsId);
+  const total = slides.children.length;
+  let current = 0;
 
-for (let i = 0; i < totalSlides; i++) {
-  const dot = document.createElement("div");
-  dot.classList.add("dot");
-  if (i === 0) dot.classList.add("active");
+  for (let i = 0; i < total; i++) {
+    const dot = document.createElement("div");
+    dot.classList.add("dot");
+    if (i === 0) dot.classList.add("active");
 
-  dot.addEventListener("click", () => {
-    current = i;
-    updateCarousel();
+    dot.addEventListener("click", () => {
+      current = i;
+      update();
+    });
+
+    dotsContainer.appendChild(dot);
+  }
+
+  function update() {
+    slides.style.transform = `translateX(-${current * 100}%)`;
+
+    dotsContainer.querySelectorAll(".dot").forEach((d, i) => {
+      d.classList.toggle("active", i === current);
+    });
+  }
+
+  let startX = 0;
+
+  slides.addEventListener("touchstart", e => {
+    startX = e.touches[0].clientX;
   });
 
-  dotsContainer.appendChild(dot);
-}
+  slides.addEventListener("touchend", e => {
+    let diff = startX - e.changedTouches[0].clientX;
 
-function updateCarousel() {
-  slides.style.transform = `translateX(-${current * 100}%)`;
+    if (diff > 50 && current < total - 1) current++;
+    if (diff < -50 && current > 0) current--;
 
-  document.querySelectorAll(".dot").forEach((dot, index) => {
-    dot.classList.toggle("active", index === current);
+    update();
   });
 }
 
-let startX = 0;
-
-slides.addEventListener("touchstart", e => {
-  startX = e.touches[0].clientX;
-});
-
-slides.addEventListener("touchend", e => {
-  let endX = e.changedTouches[0].clientX;
-  let diff = startX - endX;
-
-  if (diff > 50 && current < totalSlides - 1) current++;
-  if (diff < -50 && current > 0) current--;
-
-  updateCarousel();
-});
+initCarousel("slides1", "dots1");
+initCarousel("slides2", "dots2");
 </script>
 
 </body>
