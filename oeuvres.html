@@ -69,25 +69,25 @@ nav a:hover {
   height: 75vh;
   max-height: 800px;
   min-height: 480px;
-  overflow: hidden;
+  overflow-x: auto;
+  overflow-y: hidden;
   border: 1px solid rgba(0,0,0,0.08);
-  touch-action: pan-y;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
 }
 
 .slides {
   display: flex;
   height: 100%;
-  transition: transform 0.35s ease;
-  cursor: grab;
-  user-select: none;
 }
 
 .slide {
-  min-width: 100%;
+  flex: 0 0 100%;
   height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
+  scroll-snap-align: start;
 }
 
 .slide img {
@@ -193,7 +193,34 @@ Matériaux mixtes
 
 <div class="dots" id="dots2"></div>
 
+<div class="sep"></div>
+  
 </div>
+  
+<!-- ŒUVRE 3 -->
+<div class="work-title">
+  <span class="italic">Il y a un monstre dans mon placard</span> /
+  <span class="italic">Douce Maison</span>
+</div>
+
+<div class="work-meta">
+Juillet 2025<br>
+Installation, 135,5 x 73 x 37.3 cm<br>
+Matériaux mixtes
+</div>
+
+<div class="frame">
+  <div class="slides" id="slides1">
+
+    <div class="slide"><img src="boite.jpeg"></div>
+    <div class="slide"><img src="grenouille.jpeg"></div>
+    <div class="slide"><img src="oreiller.jpeg"></div>
+    <div class="slide"><img src="origami.jpeg"></div>
+
+  </div>
+</div>
+
+<div class="dots" id="dots1"></div>
 
 <script>
 document.addEventListener("DOMContentLoaded", () => {
