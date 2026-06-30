@@ -37,15 +37,22 @@ nav a{
 
 .contact-grid{
   display:grid;
-  grid-template-columns: 420px 1fr;
+grid-template-columns: 220px 1fr;
   gap:70px;
   align-items:start;
 }
 
-.photo img{
-  width:100%;
-  display:block;
-  object-fit:cover;
+.photo {
+  display: flex;
+  justify-content: center;
+}
+
+.photo img {
+  width: 220px;
+  max-width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
 }
 
 .title{
@@ -124,7 +131,7 @@ nav a{
   <div class="contact-info">
     <div><span class="label">Email</span> <a href="mailto:Sullivanforestier@hotmail.fr">Sullivanforestier@hotmail.fr</a></div>
     <div><span class="label">Mobile</span> 06 98 00 41 36</div>
-    <div><span class="label">Instagram</span> @sullivan_forestier</div>
+    <div><span class="label">Instagram</span> <a href="https://instagram.com/sullivan_forestier" target="_blank">@sullivan_forestier</a>
   </div>
 </div>
 
